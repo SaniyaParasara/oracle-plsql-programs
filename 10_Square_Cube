@@ -1,0 +1,35 @@
+-- =====================================================
+-- Program 10
+-- Aim:
+-- Calculate the Square and Cube of a given number.
+-- =====================================================
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+
+    -- Variable to store the number
+    num NUMBER;
+
+    -- Variables to store square and cube
+    square NUMBER;
+    cube NUMBER;
+
+BEGIN
+
+    -- Accept number from user
+    num := &Number;
+
+    -- Calculate square
+    square := num * num;
+
+    -- Calculate cube
+    cube := num * num * num;
+
+    -- Display result
+    DBMS_OUTPUT.PUT_LINE('Number = ' || num);
+    DBMS_OUTPUT.PUT_LINE('Square = ' || square);
+    DBMS_OUTPUT.PUT_LINE('Cube = ' || cube);
+
+END;
+/

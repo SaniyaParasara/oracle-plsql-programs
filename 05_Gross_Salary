@@ -1,0 +1,86 @@
+-- =====================================================
+-- Program 5
+-- Aim:
+-- Display Gross Salary of an employee using Employee ID.
+--
+-- Gross Salary = Basic Salary + DA + HRA + Medical - PF
+--
+-- DA = 50% of Basic Salary
+-- HRA = 15% of Basic Salary
+-- Medical = Rs. 500
+-- PF = 10% of Basic Salary
+-- =====================================================
+
+---------------------------------------------------------
+-- Step 1 : Create EMP Table
+---------------------------------------------------------
+
+CREATE TABLE EMP
+(
+    EID NUMBER PRIMARY KEY,
+    EName VARCHAR2(30),
+    DeptNo NUMBER,
+    DeptName VARCHAR2(30),
+    Gender VARCHAR2(10),
+    Age NUMBER,
+    BasicSal NUMBER
+);
+
+---------------------------------------------------------
+-- Step 2 : Insert Sample Data
+---------------------------------------------------------
+
+INSERT INTO EMP
+VALUES
+(101,'Amit',10,'Sales','Male',25,30000);
+
+COMMIT;
+
+---------------------------------------------------------
+-- Step 3 : PL/SQL Block
+---------------------------------------------------------
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+
+    -- Employee ID
+    id NUMBER;
+
+    -- Salary Variables
+    basic NUMBER;
+    hra NUMBER;
+    da NUMBER;
+    medical NUMBER := 500;
+    pf NUMBER;
+    gross NUMBER;
+
+BEGIN
+
+    -- Accept Employee ID
+    id := &Employee_ID;
+
+    -- Get Basic Salary from EMP table
+    SELECT BasicSal
+    INTO basic
+    FROM EMP
+    WHERE EID = id;
+
+    -- Calculate Salary Components
+    hra := basic * 0.15;
+    da := basic * 0.50;
+    pf := basic * 0.10;
+
+    -- Calculate Gross Salary
+    gross := basic + hra + da + medical - pf;
+
+    -- Display Result
+    DBMS_OUTPUT.PUT_LINE('Basic Salary = ' || basic);
+    DBMS_OUTPUT.PUT_LINE('HRA = ' || hra);
+    DBMS_OUTPUT.PUT_LINE('DA = ' || da);
+    DBMS_OUTPUT.PUT_LINE('Medical = ' || medical);
+    DBMS_OUTPUT.PUT_LINE('PF = ' || pf);
+    DBMS_OUTPUT.PUT_LINE('Gross Salary = ' || gross);
+
+END;
+/

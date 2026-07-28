@@ -1,0 +1,33 @@
+-- =====================================================
+-- Program 7
+-- Aim:
+-- Convert Temperature from Celsius to Fahrenheit.
+--
+-- Formula:
+-- Fahrenheit = (Celsius × 9 / 5) + 32
+-- =====================================================
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+
+    -- Variable to store Celsius temperature
+    celsius NUMBER;
+
+    -- Variable to store Fahrenheit temperature
+    fahrenheit NUMBER;
+
+BEGIN
+
+    -- Accept Celsius temperature from user
+    celsius := &Celsius;
+
+    -- Convert Celsius to Fahrenheit
+    fahrenheit := (celsius * 9 / 5) + 32;
+
+    -- Display Result
+    DBMS_OUTPUT.PUT_LINE('Celsius = ' || celsius);
+    DBMS_OUTPUT.PUT_LINE('Fahrenheit = ' || fahrenheit);
+
+END;
+/

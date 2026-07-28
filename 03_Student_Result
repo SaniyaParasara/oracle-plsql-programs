@@ -1,0 +1,103 @@
+-- =====================================================
+-- Program 3 : Student Result
+-- Aim:
+-- Calculate Total, Percentage and Grade of a student
+-- using Roll Number from RESULT table.
+-- =====================================================
+
+---------------------------------------------------------
+-- Step 1 : Create RESULT Table
+---------------------------------------------------------
+
+CREATE TABLE RESULT
+(
+    RollNo NUMBER PRIMARY KEY,
+    Name VARCHAR2(30),
+    Sub1 NUMBER,
+    Sub2 NUMBER,
+    Sub3 NUMBER,
+    Sub4 NUMBER,
+    Sub5 NUMBER,
+    Total NUMBER,
+    Per NUMBER,
+    Grade VARCHAR2(5)
+);
+
+---------------------------------------------------------
+-- Step 2 : Insert Sample Data
+---------------------------------------------------------
+
+INSERT INTO RESULT
+VALUES
+(1,'Rahul',80,75,90,85,70,NULL,NULL,NULL);
+
+COMMIT;
+
+---------------------------------------------------------
+-- Step 3 : PL/SQL Block
+---------------------------------------------------------
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+
+    -- Variable to store Roll Number
+    rno NUMBER;
+
+    -- Variables to store subject marks
+    s1 NUMBER;
+    s2 NUMBER;
+    s3 NUMBER;
+    s4 NUMBER;
+    s5 NUMBER;
+
+    -- Variables for result
+    total NUMBER;
+    per NUMBER;
+    grade VARCHAR2(5);
+
+BEGIN
+
+    -- Accept Roll Number from user
+    rno := &Roll_No;
+
+    -- Fetch marks from RESULT table
+    SELECT Sub1, Sub2, Sub3, Sub4, Sub5
+    INTO s1, s2, s3, s4, s5
+    FROM RESULT
+    WHERE RollNo = rno;
+
+    -- Calculate Total Marks
+    total := s1 + s2 + s3 + s4 + s5;
+
+    -- Calculate Percentage
+    per := total / 5;
+
+    -- Find Grade
+    IF per >= 75 THEN
+        grade := 'A';
+    ELSIF per >= 60 THEN
+        grade := 'B';
+    ELSIF per >= 40 THEN
+        grade := 'C';
+    ELSE
+        grade := 'F';
+    END IF;
+
+    -- Update calculated values in RESULT table
+    UPDATE RESULT
+    SET Total = total,
+        Per = per,
+        Grade = grade
+    WHERE RollNo = rno;
+
+    -- Save changes
+    COMMIT;
+
+    -- Display Result
+    DBMS_OUTPUT.PUT_LINE('Total Marks = ' || total);
+    DBMS_OUTPUT.PUT_LINE('Percentage = ' || per);
+    DBMS_OUTPUT.PUT_LINE('Grade = ' || grade);
+
+END;
+/

@@ -1,0 +1,82 @@
+-- =====================================================
+-- Program 4
+-- Aim:
+-- Print numbers from 1 to 100 using:
+-- 1. FOR LOOP
+-- 2. LOOP
+-- 3. WHILE LOOP
+-- =====================================================
+
+---------------------------------------------------------
+-- 1. Print 1 to 100 using FOR LOOP
+---------------------------------------------------------
+
+SET SERVEROUTPUT ON;
+
+BEGIN
+
+    -- FOR loop automatically increments from 1 to 100
+    FOR i IN 1..100 LOOP
+
+        DBMS_OUTPUT.PUT_LINE(i);
+
+    END LOOP;
+
+END;
+/
+
+---------------------------------------------------------
+-- 2. Print 1 to 100 using LOOP
+---------------------------------------------------------
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+
+    -- Initialize variable
+    i NUMBER := 1;
+
+BEGIN
+
+    LOOP
+
+        -- Display current value
+        DBMS_OUTPUT.PUT_LINE(i);
+
+        -- Increment value
+        i := i + 1;
+
+        -- Exit loop after 100
+        EXIT WHEN i > 100;
+
+    END LOOP;
+
+END;
+/
+
+---------------------------------------------------------
+-- 3. Print 1 to 100 using WHILE LOOP
+---------------------------------------------------------
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+
+    -- Initialize variable
+    i NUMBER := 1;
+
+BEGIN
+
+    -- Execute while condition is true
+    WHILE i <= 100 LOOP
+
+        -- Display current value
+        DBMS_OUTPUT.PUT_LINE(i);
+
+        -- Increment value
+        i := i + 1;
+
+    END LOOP;
+
+END;
+/

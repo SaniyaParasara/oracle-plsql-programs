@@ -1,0 +1,37 @@
+-- Program 1
+-- Calculate Area of Circle, Area of Rectangle and Circumference
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+    -- Declare variables
+    radius NUMBER;
+    length NUMBER;
+    width NUMBER;
+
+    area_circle NUMBER;
+    area_rectangle NUMBER;
+    circumference NUMBER;
+
+BEGIN
+    -- Accept values from user
+    radius := &radius;
+    length := &length;
+    width := &width;
+
+    -- Formula: πr²
+    area_circle := 3.14 * radius * radius;
+
+    -- Formula: Length × Width
+    area_rectangle := length * width;
+
+    -- Formula: 2πr
+    circumference := 2 * 3.14 * radius;
+
+    -- Display output
+    DBMS_OUTPUT.PUT_LINE('Area of Circle = ' || area_circle);
+    DBMS_OUTPUT.PUT_LINE('Area of Rectangle = ' || area_rectangle);
+    DBMS_OUTPUT.PUT_LINE('Circumference = ' || circumference);
+
+END;
+/

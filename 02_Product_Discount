@@ -1,0 +1,43 @@
+-- Program 2: Product Discount
+-- Accept Product Name, Quantity, Price and Discount (%)
+-- Calculate Total Amount, Discount Amount and Final Amount
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+    -- Declare variables
+    pname VARCHAR2(30);
+    qty NUMBER;
+    price NUMBER;
+    dis_per NUMBER;
+
+    total NUMBER;
+    dis_amt NUMBER;
+    final_amt NUMBER;
+
+BEGIN
+    -- Accept input from user
+    pname := '&Product_Name';
+    qty := &Quantity;
+    price := &Price;
+    dis_per := &Discount_Percent;
+
+    -- Calculate total amount
+    total := qty * price;
+
+    -- Calculate discount amount
+    dis_amt := (total * dis_per) / 100;
+
+    -- Calculate final amount after discount
+    final_amt := total - dis_amt;
+
+    -- Display the result
+    DBMS_OUTPUT.PUT_LINE('Product Name   : ' || pname);
+    DBMS_OUTPUT.PUT_LINE('Quantity       : ' || qty);
+    DBMS_OUTPUT.PUT_LINE('Price          : ' || price);
+    DBMS_OUTPUT.PUT_LINE('Total Amount   : ' || total);
+    DBMS_OUTPUT.PUT_LINE('Discount (Rs.) : ' || dis_amt);
+    DBMS_OUTPUT.PUT_LINE('Final Amount   : ' || final_amt);
+
+END;
+/

@@ -1,0 +1,59 @@
+-- =====================================================
+-- Program 8
+-- Aim:
+-- Delete the record of an employee using Employee ID (EID).
+-- =====================================================
+
+---------------------------------------------------------
+-- Step 1 : Create EMP Table
+---------------------------------------------------------
+
+CREATE TABLE EMP
+(
+    EID NUMBER PRIMARY KEY,
+    EName VARCHAR2(30),
+    DeptNo NUMBER,
+    DeptName VARCHAR2(30),
+    Gender VARCHAR2(10),
+    Age NUMBER,
+    BasicSal NUMBER
+);
+
+---------------------------------------------------------
+-- Step 2 : Insert Sample Data
+---------------------------------------------------------
+
+INSERT INTO EMP
+VALUES
+(101,'Amit',10,'Sales','Male',25,30000);
+
+COMMIT;
+
+---------------------------------------------------------
+-- Step 3 : PL/SQL Block
+---------------------------------------------------------
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+
+    -- Variable to store Employee ID
+    id NUMBER;
+
+BEGIN
+
+    -- Accept Employee ID from user
+    id := &Employee_ID;
+
+    -- Delete employee record
+    DELETE FROM EMP
+    WHERE EID = id;
+
+    -- Save changes
+    COMMIT;
+
+    -- Display success message
+    DBMS_OUTPUT.PUT_LINE('Employee Record Deleted Successfully.');
+
+END;
+/

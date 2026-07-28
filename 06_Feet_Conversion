@@ -1,0 +1,43 @@
+-- =====================================================
+-- Program 6
+-- Aim:
+-- Accept measurement in Feet and convert it into:
+-- 1. Centimeter (cm)
+-- 2. Inch
+-- 3. Meter
+-- =====================================================
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+
+    -- Variable to store feet
+    feet NUMBER;
+
+    -- Variables for converted values
+    cm NUMBER;
+    inch NUMBER;
+    meter NUMBER;
+
+BEGIN
+
+    -- Accept input from user
+    feet := &Feet;
+
+    -- Convert Feet into Centimeter
+    cm := feet * 30.48;
+
+    -- Convert Feet into Inch
+    inch := feet * 12;
+
+    -- Convert Feet into Meter
+    meter := feet * 0.3048;
+
+    -- Display Result
+    DBMS_OUTPUT.PUT_LINE('Feet = ' || feet);
+    DBMS_OUTPUT.PUT_LINE('Centimeter = ' || cm);
+    DBMS_OUTPUT.PUT_LINE('Inch = ' || inch);
+    DBMS_OUTPUT.PUT_LINE('Meter = ' || meter);
+
+END;
+/

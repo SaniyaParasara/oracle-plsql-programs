@@ -1,0 +1,40 @@
+-- =====================================================
+-- Program 9
+-- Aim:
+-- Calculate Simple Interest based on:
+-- 1. Principal Amount
+-- 2. Rate of Interest
+-- 3. Number of Years
+--
+-- Formula:
+-- Simple Interest = (Principal × Rate × Time) / 100
+-- =====================================================
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+
+    -- Variables
+    principal NUMBER;
+    rate NUMBER;
+    years NUMBER;
+    si NUMBER;
+
+BEGIN
+
+    -- Accept input from user
+    principal := &Principal_Amount;
+    rate := &Rate_of_Interest;
+    years := &Number_of_Years;
+
+    -- Calculate Simple Interest
+    si := (principal * rate * years) / 100;
+
+    -- Display Result
+    DBMS_OUTPUT.PUT_LINE('Principal Amount = ' || principal);
+    DBMS_OUTPUT.PUT_LINE('Rate of Interest = ' || rate || '%');
+    DBMS_OUTPUT.PUT_LINE('Number of Years = ' || years);
+    DBMS_OUTPUT.PUT_LINE('Simple Interest = ' || si);
+
+END;
+/

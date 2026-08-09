@@ -1,5 +1,7 @@
--- Program 1
--- Calculate Area of Circle, Area of Rectangle and Circumference
+*/
+Program 1
+Calculate Area of Circle, Area of Rectangle and Circumference
+/*
 
 SET SERVEROUTPUT ON;
 

@@ -1,5 +1,5 @@
 /*
-Write a PL/SQL block to accept an employee's Basic Salary and
+1. Write a PL/SQL block to accept an employee's Basic Salary and
 calculate:
  HRA = 20%
  DA = 45%
@@ -39,3 +39,312 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('==========================================');
 END;
 /
+
+
+
+
+
+/*
+2. Create a STUDENT table and write a PL/SQL block that accepts Roll
+Number and:
+ Calculates Total
+ Percentage
+ Assigns Grade
+ Displays Pass/Fail status (Pass if all subjects ≥35).
+*/
+
+CREATE TABLE STUDENT (
+    roll_no   NUMBER PRIMARY KEY,
+    name      VARCHAR2(50),
+    sub1      NUMBER,
+    sub2      NUMBER,
+    sub3      NUMBER,
+    sub4      NUMBER,
+    sub5      NUMBER
+);
+
+INSERT INTO STUDENT VALUES (101, 'Saniya P', 80, 75, 40, 60, 90);
+INSERT INTO STUDENT VALUES (102, 'Salomi P', 30, 55, 60, 45, 50);
+COMMIT;
+
+SELECT * FROM STUDENT;
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+    v_roll      STUDENT.roll_no%TYPE := &roll_no;
+    v_name      STUDENT.name%TYPE;
+    v_sub1      NUMBER;
+    v_sub2      NUMBER;
+    v_sub3      NUMBER;
+    v_sub4      NUMBER;
+    v_sub5      NUMBER;
+    v_total     NUMBER;
+    v_percent   NUMBER(5,2);
+    v_grade     VARCHAR2(10);
+    v_status    VARCHAR2(10);
+BEGIN
+    SELECT name, sub1, sub2, sub3, sub4, sub5
+    INTO   v_name, v_sub1, v_sub2, v_sub3, v_sub4, v_sub5
+    FROM   STUDENT
+    WHERE  roll_no = v_roll;
+
+    v_total   := v_sub1 + v_sub2 + v_sub3 + v_sub4 + v_sub5;
+    v_percent := v_total / 5;
+
+   
+    IF v_percent >= 90 THEN
+        v_grade := 'A+';
+    ELSIF v_percent >= 75 THEN
+        v_grade := 'A';
+    ELSIF v_percent >= 60 THEN
+        v_grade := 'B';
+    ELSIF v_percent >= 40 THEN
+        v_grade := 'C';
+    ELSE
+        v_grade := 'F';
+    END IF;
+
+    
+    IF v_sub1 >= 35 AND v_sub2 >= 35 AND v_sub3 >= 35 
+       AND v_sub4 >= 35 AND v_sub5 >= 35 THEN
+        v_status := 'PASS';
+    ELSE
+        v_status := 'FAIL';
+    END IF;
+
+    DBMS_OUTPUT.PUT_LINE('==========================================');
+    DBMS_OUTPUT.PUT_LINE('             STUDENT REPORT CARD           ');
+    DBMS_OUTPUT.PUT_LINE('==========================================');
+    DBMS_OUTPUT.PUT_LINE(RPAD('Roll No', 20)     || ': ' || v_roll);
+    DBMS_OUTPUT.PUT_LINE(RPAD('Name', 20)        || ': ' || v_name);
+    DBMS_OUTPUT.PUT_LINE('------------------------------------------');
+    DBMS_OUTPUT.PUT_LINE(RPAD('Subject 1', 20)   || ': ' || v_sub1);
+    DBMS_OUTPUT.PUT_LINE(RPAD('Subject 2', 20)   || ': ' || v_sub2);
+    DBMS_OUTPUT.PUT_LINE(RPAD('Subject 3', 20)   || ': ' || v_sub3);
+    DBMS_OUTPUT.PUT_LINE(RPAD('Subject 4', 20)   || ': ' || v_sub4);
+    DBMS_OUTPUT.PUT_LINE(RPAD('Subject 5', 20)   || ': ' || v_sub5);
+    DBMS_OUTPUT.PUT_LINE('------------------------------------------');
+    DBMS_OUTPUT.PUT_LINE(RPAD('Total', 20)       || ': ' || v_total);
+    DBMS_OUTPUT.PUT_LINE(RPAD('Percentage', 20)  || ': ' || v_percent || '%');
+    DBMS_OUTPUT.PUT_LINE(RPAD('Grade', 20)       || ': ' || v_grade);
+    DBMS_OUTPUT.PUT_LINE(RPAD('Status', 20)      || ': ' || v_status);
+    DBMS_OUTPUT.PUT_LINE('==========================================');
+
+END;
+/
+
+
+
+/*
+Write a PL/SQL program to generate the multiplication table of a
+user-entered number using:
+ FOR LOOP
+ WHILE LOOP
+*/
+
+-- ============================
+-- METHOD 1: USING FOR LOOP
+-- ============================
+SET SERVEROUTPUT ON;
+
+DECLARE
+    v_num NUMBER := &num;
+    v_result NUMBER;
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('==========================================');
+    DBMS_OUTPUT.PUT_LINE('   MULTIPLICATION TABLE (FOR LOOP)        ');
+    DBMS_OUTPUT.PUT_LINE('==========================================');
+
+    FOR i IN 1..10 LOOP
+        v_result := v_num * i;
+        DBMS_OUTPUT.PUT_LINE(RPAD(v_num || ' x ' || i, 15) || ' = ' || v_result);
+    END LOOP;
+
+    DBMS_OUTPUT.PUT_LINE('==========================================');
+
+    DBMS_OUTPUT.PUT_LINE('==========================================');
+    DBMS_OUTPUT.PUT_LINE('   MULTIPLICATION TABLE (FOR LOOP)        ');
+    DBMS_OUTPUT.PUT_LINE('==========================================');
+
+    WHILE i <=10 LOOP
+        DBMS_OUTPUT.PUT_LINE(RPAD(v_num || ' x ' || i || ' = ' || (v_num*i)));
+        i := i+1;
+    END LOOP;
+
+    DBMS_OUTPUT.PUT_LINE('==========================================');
+
+END;
+/
+
+
+
+
+/*
+Write a PL/SQL program to generate the multiplication table of a
+user-entered number using:
+ FOR LOOP
+ WHILE LOOP
+*/
+
+-- ============================
+-- METHOD 2: USING WHILE LOOP
+-- ============================
+SET SERVEROUTPUT ON;
+
+DECLARE
+    v_num NUMBER := &num;
+    v_i NUMBER := 1;
+    v_result NUMBER;
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('==========================================');
+    DBMS_OUTPUT.PUT_LINE('   MULTIPLICATION TABLE (WHILE LOOP)      ');
+    DBMS_OUTPUT.PUT_LINE('==========================================');
+
+    WHILE v_i <= 10 LOOP
+        v_result := v_num * v_i;
+        DBMS_OUTPUT.PUT_LINE(RPAD(v_num || ' x ' || v_i, 15) || ' = ' || v_result);
+        v_i := v_i + 1;
+    END LOOP;
+
+    DBMS_OUTPUT.PUT_LINE('==========================================');
+END;
+/
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+   Write a PL/SQL block to accept an employee ID and:
+   - Retrieve employee details
+   - Calculate yearly salary
+   - Display whether employee belongs to High Income 
+     (> ₹600000/year) or Normal Income.
+*/
+
+
+CREATE TABLE EMPLOYEE (
+    emp_id     NUMBER PRIMARY KEY,
+    emp_name   VARCHAR2(50),
+    dept       VARCHAR2(30),
+    monthly_salary NUMBER
+);
+
+INSERT INTO EMPLOYEE VALUES (1, 'SANIYA P', 'IT', 55000);
+INSERT INTO EMPLOYEE VALUES (2, 'SALOMI P', 'HR', 70000);
+COMMIT;
+
+
+
+
+
+/*
+    4. Write a PL/SQL block to accept an employee ID and:
+   - Retrieve employee details
+   - Calculate yearly salary
+   - Display whether employee belongs to High Income 
+     (> ₹600000/year) or Normal Income.
+*/
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+    v_emp_id     EMPLOYEE.emp_id%TYPE := &emp_id;
+    v_emp_name   EMPLOYEE.emp_name%TYPE;
+    v_dept       EMPLOYEE.dept%TYPE;
+    v_monthly    NUMBER;
+    v_yearly     NUMBER;
+    v_category   VARCHAR2(20);
+BEGIN
+    SELECT emp_name, dept, monthly_salary
+    INTO   v_emp_name, v_dept, v_monthly
+    FROM   EMPLOYEE
+    WHERE  emp_id = v_emp_id;
+
+    v_yearly := v_monthly * 12;
+
+    IF v_yearly > 600000 THEN
+        v_category := 'HIGH INCOME';
+    ELSE
+        v_category := 'NORMAL INCOME';
+    END IF;
+
+    DBMS_OUTPUT.PUT_LINE('==========================================');
+    DBMS_OUTPUT.PUT_LINE('           EMPLOYEE INCOME REPORT          ');
+    DBMS_OUTPUT.PUT_LINE('==========================================');
+    DBMS_OUTPUT.PUT_LINE(RPAD('Employee ID', 20)     || ': ' || v_emp_id);
+    DBMS_OUTPUT.PUT_LINE(RPAD('Name', 20)             || ': ' || v_emp_name);
+    DBMS_OUTPUT.PUT_LINE(RPAD('Department', 20)       || ': ' || v_dept);
+    DBMS_OUTPUT.PUT_LINE('------------------------------------------');
+    DBMS_OUTPUT.PUT_LINE(RPAD('Monthly Salary', 20)   || ': ' || v_monthly);
+    DBMS_OUTPUT.PUT_LINE(RPAD('Yearly Salary', 20)    || ': ' || v_yearly);
+    DBMS_OUTPUT.PUT_LINE(RPAD('Income Category', 20)  || ': ' || v_category);
+    DBMS_OUTPUT.PUT_LINE('==========================================');
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('No employee found with ID: ' || v_emp_id);
+END;
+/
+
+
+
+
+
+
+/* 
+5. Write a PL/SQL block which displays gross salary of employees as per user input EID.
+ (Consider EMP table with EID, EName, Deptno, Deptname Gender, Age, BasicSal) 
+ with appropriate data types.) Gross_Salary: BASICSAL + (DA + HRA + Medical) – PF. Rules: 
+ HRA = 15% of basic, DA = 50% of basic, Medical = Rs. 500, PF = 10% of basic. 
+ */
+
+SET SERVEROUTPUT ON;
+SET VERIFY OFF;
+SET FEEDBACK OFF;
+
+DECLARE
+    E NUMBER;
+    N VARCHAR2(50);
+    D VARCHAR2(30);
+    M NUMBER;
+    Y NUMBER;
+BEGIN
+    E := &EMP_ID;
+
+    SELECT EMP_NAME, DEPT, MONTHLY_SALARY
+    INTO N, D, M
+    FROM EMPLOYEE
+    WHERE EMP_ID = E;
+
+    Y := M * 12;
+
+    DBMS_OUTPUT.PUT_LINE('EMPLOYEE ID    : ' || E);
+    DBMS_OUTPUT.PUT_LINE('EMPLOYEE NAME  : ' || N);
+    DBMS_OUTPUT.PUT_LINE('DEPARTMENT     : ' || D);
+    DBMS_OUTPUT.PUT_LINE('MONTHLY SALARY : ' || M);
+    DBMS_OUTPUT.PUT_LINE('YEARLY SALARY  : ' || Y);
+
+    IF Y > 600000 THEN
+        DBMS_OUTPUT.PUT_LINE('HIGH INCOME');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('NORMAL INCOME');
+    END IF;
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('EMPLOYEE ID NOT FOUND');
+END;
+/
+
+SET SERVEROUTPUT OFF;
+SET VERIFY ON;
+SET FEEDBACK ON;
